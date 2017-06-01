@@ -1,0 +1,33 @@
+{
+  "name": "tunnelrun.streetview",
+  "description": "Fetch and proxy 360° panoramic images from Google Street View.",
+  "version": "0.1.0",
+  "license": "CC0-1.0",
+  "repository": "https://github.com/tunnelrun/flickr",
+  "homepage": "https://github.com/tunnelrun/flickr",
+  "bugs": {
+    "url": "https://github.com/tunnelrun/flickr/issues"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "cross-env": "^5.0.0",
+    "node-static": "^0.7.9",
+    "nunjucks": "^3.0.0"
+  },
+  "devDependencies": {
+    "extract-streetview": "^1.2.0",
+    "nodemon": "^1.11.0",
+    "semistandard": "^11.0.0",
+    "shx": "^0.2.2",
+    "snazzy": "^7.0.0"
+  },
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "prod": "cross-env NODE_ENV=production node index.js"
+  },
+  "semistandard": {
+    "ignore": [
+    ]
+  }
+}

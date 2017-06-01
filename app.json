@@ -1,0 +1,38 @@
+{
+  "name": "tunnelrun.streetview",
+  "description": "Fetch and proxy 360° panoramic images from Google Street View.",
+  "repository": "https://github.com/tunnelrun/streetview",
+  "env": {
+    "PORT": {
+      "description": "Port on which to run the server (e.g., `7000`).",
+      "value": 7000,
+      "required": false
+    }
+  },
+  "keywords": [
+    "tunnelrun",
+    "tunnel-run",
+    "tunnel",
+    "proxy",
+    "proxies",
+    "cors",
+    "image",
+    "assets",
+    "service",
+    "streetview",
+    "street-view",
+    "street",
+    "360",
+    "photo",
+    "equirectangular",
+    "pano",
+    "panorama",
+    "panoramic",
+    "googlemaps",
+    "google-maps",
+    "maps",
+    "aframevr",
+    "aframe",
+    "cache"
+  ]
+}

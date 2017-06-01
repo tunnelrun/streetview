@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% if page.theme_color -%}
+      <meta name="theme-color" content="{{ page.theme_color }}">
+    {%- endif -%}
+
+    {% if page.apple_mobile_web_app_status_bar_style or page.theme_color -%}
+      <meta name="apple-mobile-web-app-status-bar-style" content="{{ page.apple_mobile_web_app_status-bar_style or page.theme_color }}">
+    {%- endif -%}
+
+    <link rel="canonical" href="{{ page.url }}">
+    <link rel="manifest" href="{{ page.url }}/manifest.webmanifest">
+
+    {%- if page.processed_best_icon -%}
+      <link rel="icon"{% if page.processed_best_icon.sizes %} sizes="{{ page.processed_best_icon.sizes }}"{% endif %} href="{{ page.processed_best_icon.src }}">
+    {%- endif -%}
+    {%- if page.processed_best_mask_icon -%}
+      <link rel="mask-icon" href="{{ page.processed_best_mask_icon.src }}" color="{{ page.processed_best_mask_icon.color }}">
+    {%- endif %}
+
+    <meta property="og:title" content="{{ page.name }}">
+    <meta property="og:site_name" content="{{ page.name }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.url }}">
+    {% if page.description -%}
+      <meta property="og:description" content="{{ page.description }}">
+    {%- endif %}
+    <meta property="og:image" content="https://streetview.tunnel.run/icon.svg">
+
+    <meta name="twitter:card" content="summary">
+
+    <title>{{ page.name }}</title>
+
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-sky src="{{ page.pano.src }}"></a-sky>
+    </a-scene>
+  </body>
+</html>

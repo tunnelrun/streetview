@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="theme-color" content="#008b8b">
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      [aria-hidden="true"] {
+        display: none !important;
+      }
+
+      .visually-hidden {
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        top: -10px;
+        width: 1px;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      html {
+        background-color: #8b008b;
+        font-size: 14px;
+      }
+
+      body {
+        color: #eee;
+        font: 1rem/1.3 Helvetica Neue, Helvetica, Arial, sans-serif;
+        margin: 0 auto;
+        padding: 6rem 3rem;
+      }
+
+      body,
+      .footer {
+        max-width: 80rem;
+      }
+
+      [data-font-loaded~="franklin_gothic_fsbook"] body {
+        font-family: franklin_gothic_fsbook, Helvetica Neue, Helvetica, Arial, sans-serif;
+      }
+
+      [data-font-loaded~="franklin_gothic_fsdemi"] .site-title {
+        font-family: franklin_gothic_fsdemi, Helvetica Neue, Helvetica, Arial, sans-serif;
+      }
+
+      .site-title a {
+        color: rgba(0,0,0,.6);
+        display: block;
+        font-size: 3rem;
+        font-size: calc(1.5rem + 3vw + 1vh);
+        font-weight: 600;
+        opacity: .9;
+        padding-left: 9rem;
+        padding-left: calc(2.5rem + 8vw);
+        position: relative;
+        text-decoration: none;
+        transition: .15s color ease-in-out, .15s opacity ease-in-out;
+      }
+
+      .site-title a:hover {
+        color: rgba(255,255,255,.3);
+        opacity: 1;
+      }
+
+      .site-title a:before {
+        background: rgba(0,0,0,.3);
+        border-radius: 50%;
+        border: 2px solid rgba(0,0,0,.9);
+        content: "";
+        height: 10vw;
+        left: 0;
+        max-height: 8rem;
+        max-width: 8rem;
+        min-height: 4rem;
+        min-width: 4rem;
+        position: absolute;
+        top: -1vw;
+        transition: .15s background-color ease-in-out, .15s border-color ease-in-out;
+        width: 10vw;
+      }
+
+      .site-title a:hover:before {
+        background-color: rgba(255,255,255,.15);
+        border-color: rgba(255,255,255,.15);
+      }
+
+      .site-title a:after {
+        background: url(icon.svg) 50% 50% no-repeat;
+        background-size: 60% 60%;
+        border-radius: 50%;
+        border: 2px solid transparent;
+        content: "";
+        filter: invert(1);
+        height: 10vw;
+        left: 0;
+        max-height: 8rem;
+        max-width: 8rem;
+        min-height: 4rem;
+        min-width: 4rem;
+        order: -1;
+        position: absolute;
+        top: -1vw;
+        transition: .15s filter ease-in-out;
+        width: 10vw;
+      }
+
+      .site-title a:hover:after {
+        filter: invert(0);
+      }
+
+      .content {
+        padding: 3rem 0 4.5rem;
+      }
+
+      button,
+      input,
+      textarea,
+      select {
+        font-family: inherit;
+        font-size: 1rem;
+      }
+
+      p,
+      dl,
+      ol,
+      ul {
+        margin-top: 1.5rem;
+      }
+
+      .form-label {
+        position: relative;
+      }
+
+      .form code {
+        background-color: rgba(0,0,0,.075);
+        color: rgba(255,255,255,.5);
+        padding: .1rem .2rem;
+      }
+
+      .form-btn {
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        height: 30px;
+        width: 30px;
+      }
+
+      .form-btn-geolocate {
+        opacity: .8;
+        filter: grayscale(1);
+        position: absolute;
+        right: .8rem;
+        top: -.6rem;
+        transition: .15s filter ease-in-out, .15s opacity ease-in-out;
+      }
+
+      .form-btn-geolocate[disabled] {
+        cursor: not-allowed;
+        opacity: .5;
+      }
+
+      .form-btn-geolocate:hover {
+        opacity: 1;
+        filter: grayscale(0);
+      }
+
+      .btn {
+        font-size: 1.5rem;
+        text-decoration: none;
+      }
+
+      .btn {
+        background: #fff;
+        border: 3px solid #333;
+        box-shadow: #666 1px 1px 0 0, #777 2px 2px 0 0, #888 3px 3px 0 0, #999 4px 4px 0 0, #aaa 5px 5px 0 0;
+        color: #333;
+        cursor: pointer;
+        display: inline-block;
+        letter-spacing: .2ch;
+        margin-bottom: 15px;
+        padding: 0.25em 0.75em;
+        position: relative;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: .15s border-color ease-in-out, .15s box-shadow ease-in-out, .15s left ease-in-out, .15s top ease-in-out;
+      }
+
+      .btn:active {
+        border-color: #aaa;
+        box-shadow: 0;
+        left: 5px;
+        top: 5px;
+      }
+
+      .log-in-btn {
+        border-color: #00bc52;
+        box-shadow: #67ffa9 1px 1px 0 0, #78ffb3 2px 2px 0 0, #89ffbc 3px 3px 0 0, #9affc6 4px 4px 0 0, #abffcf 5px 5px 0 0;
+        color: #005625;
+      }
+
+      .log-in-btn:hover {
+        border-color: #009a43;
+        box-shadow: #89ffbc 1px 1px 0 0, #9affc6 2px 2px 0 0, #abffcf 3px 3px 0 0, #bcffd9 4px 4px 0 0, #cdffe3 5px 5px 0 0;
+        color: #005625;
+      }
+
+      .log-in-btn:active {
+        border-color: #00de61;
+        box-shadow: #89ffbc 1px 1px 0 0, #9affc6 2px 2px 0 0, #abffcf 3px 3px 0 0, #bcffd9 4px 4px 0 0;
+      }
+
+      .log-in {
+        margin-bottom: 2rem;
+      }
+
+      .form {
+        padding-top: 3rem;
+      }
+
+      .form .url {
+        font-size: 1.2rem;
+        font-size: calc(.8rem + .5vw + .25vh);
+        padding: 1rem .8rem;
+        width: 100%;
+      }
+
+      .label {
+        display: block;
+        margin-bottom: 1rem;
+      }
+
+      .label em a {
+        color: rgba(0,0,0,.75);
+      }
+
+      .label em {
+        color: rgba(0,0,0,.5);
+        font-size: .9rem;
+        padding-left: .5rem;
+        font-style: normal;
+      }
+
+      .label em.hint {
+        color: rgba(0,0,0,.75);
+      }
+
+      .label em.examples {
+        display: block;
+        padding: .25rem 0 .5rem;
+      }
+
+      /* Input `:focus` styles adapted from those on https://github.com/ */
+      input[type="text"] {
+        /*border: 1px solid #d1d5da;*/
+        border: 1px solid rgba(0,0,0,.7);
+        border-radius: 3px;
+      }
+
+      input[type="text"]:focus {
+        background-color: #fff;
+        /*border-color: #2188ff;*/
+        border-color: rgba(0,0,0,.9);
+        /*box-shadow: inset 0 1px 2px rgba(27,31,35,.075), 0 0 0 .2em rgba(3,102,214,.3);*/
+        box-shadow: inset 0 1px 2px rgba(0,0,0,.075), 0 0 0 .2em rgba(255,255,255,.3);
+        outline: none;
+      }
+
+      .icon {
+        display: inline-block;
+        fill: currentColor;
+        height: 32px;
+        stroke: currentColor;
+        stroke-width: 0;
+        width: 32px;
+        vertical-align: middle;
+      }
+
+      .icon-link .icon {
+        margin-right: 0;
+        opacity: .35;
+        transition: .15s opacity ease-in-out;
+        transform: scale(.5);
+        transform-origin: 0 14px;
+      }
+
+      .icon-link {
+        color: rgba(255,255,255,.6);
+        display: block;
+        font-size: .8rem;
+        text-decoration: none;
+        transition: .15s color ease-in-out;
+      }
+
+      .icon-link:hover {
+        color: rgba(255,255,255,.9);
+      }
+
+      .icon-link:hover .icon {
+        opacity: 1;
+      }
+
+      @media (min-width: 35em) and (min-height: 35em) {
+        body {
+          position: relative;
+        }
+
+        .site-footer {
+          border-top: rgba(255,255,255,.5) 2px solid;
+          bottom: 3rem;
+          left: 0;
+          padding-top: 1.5rem;
+          position: absolute;
+          right: 0;
+          margin: 1.5rem 3rem 0;
+        }
+
+        .icon-link {
+          font-size: 1rem;
+        }
+
+        .icon-link:not(:first-child) {
+          padding-top: .25rem;
+        }
+
+        .icon-link + .icon-link {
+          padding-bottom: .25rem;
+        }
+
+        .label em.examples {
+          float: right;
+        }
+
+        .label em.examples:after {
+          content: "";
+          clear: left;
+          display: block;
+        }
+      }
+      </style>
+
+    <link rel="canonical" href="https://streetview.tunnel.run/">
+    <link rel="manifest" href="/manifest.webmanifest">
+
+    <link rel="icon" sizes="256x256" href="/icon.svg">
+    <link rel="mask-icon" href="/icon.svg" color="#432bff">
+
+    <meta property="og:title" content="TunnelRun">
+    <meta property="og:site_name" content="TunnelRun">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://streetview.tunnel.run/">
+    <meta property="og:description" content="A nifty tool for fetching metadata from W3C Web-App Manifests.">
+    <meta property="og:image" content="https://streetview.tunnel.run/icon.svg">
+
+    <meta name="twitter:card" content="summary">
+
+    <title>Streetview • TunnelRun</title>
+  </head>
+  <body>
+    <h1 class="site-title" id="site-title">
+      <a href="./" title="TunnelRun">TunnelRun</a>
+      <span class="tagline visually-hidden">A nifty tool for fetching metadata from W3C Web-App Manifests</span>
+    </h1>
+    <main class="content" id="content">
+      <form class="form" id="form" action="#" method="get">
+        <label class="form-label">
+          <span class="label">Latitude, Longitude <em class="hint">(e.g., <code>27.814125,86.713193</code>)</em> <em class="examples">(Examples: <a href="https://github.com/Jam3/awesome-streetview/blob/master/locations.json">awesome-streetview</a>)</em></span>
+          <input type="text" placeholder="Example: 27.814125,86.713193" class="url" id="url" autofocus autocapitalize="off" required value="">
+          <button id="form-btn-geolocate" class="form-btn form-btn-geolocate" title="Use my current location" disabled>
+            <!-- Source credits: https://feather.netlify.com/ -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#00449e" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M22 12h-4M6 12H2m10-6V2m0 20v-4"/>
+            </svg>
+          </button>
+        </label>
+      </form>
+    </main>
+    <footer class="site-footer" id="site-footer">
+      <a class="icon-link icon-link-github" href="https://github.com/tunnelrun/streetview">
+        <svg class="icon icon-github">
+          <use xlink:href="#icon-github"/>
+        </svg>
+        View source code on <strong>GitHub</strong>
+      </a>
+      <a class="icon-link icon-link-cc0" href="https://github.com/tunnelrun/streetview/blob/master/LICENSE.md">
+        <svg class="icon icon-cc0">
+          <use xlink:href="#icon-cc0"/>
+        </svg>
+        View <strong>Creative Commons Zero v1.0 Universal (CC0)</strong> license
+      </a>
+    </footer>
+    <!-- Source credits: https://feather.netlify.com/ -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+      <defs>
+        <symbol id="icon-crosshair">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M22 12h-4M6 12H2m10-6V2m0 20v-4"/>
+        </symbol>
+      </defs>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+      <defs>
+        <symbol id="icon-github">
+          <path fill="#fff" fill-rule="evenodd" d="M15.992 0C7.162 0 0 7.16 0 15.994c0 7.066 4.582 13.06 10.938 15.175.8.14 1.09-.35 1.09-.77 0-.38-.012-1.39-.02-2.72-4.448.97-5.387-2.14-5.387-2.14-.72-1.85-1.77-2.34-1.77-2.34-1.45-.99.11-.97.11-.97 1.61.11 2.45 1.65 2.45 1.65 1.438 2.44 3.755 1.73 4.668 1.32.145-1.03.56-1.74 1.015-2.138-3.55-.403-7.284-1.778-7.284-7.905 0-1.747.62-3.175 1.643-4.29-.168-.407-.715-2.033.156-4.235 0 0 1.345-.43 4.4 1.64 1.275-.356 2.64-.532 4.004-.54 1.36.008 2.728.184 4.007.54 3.05-2.07 4.39-1.64 4.39-1.64.875 2.2.326 3.83.16 4.233 1.028 1.12 1.646 2.544 1.646 4.29 0 6.143-3.74 7.495-7.3 7.89.575.495 1.086 1.47 1.086 2.964 0 2.134-.02 3.86-.02 4.383 0 .43.29.93 1.1.773 6.343-2.11 10.92-8.1 10.92-15.164C31.988 7.16 24.827 0 15.994 0"/>
+        </symbol>
+      </defs>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+      <defs>
+        <symbol id="icon-cc0">
+          <g fill="none" fill-rule="evenodd">
+            <ellipse cx="15.914" cy="16.184" fill="rgba(0,0,0,.25)" rx="14.816" ry="14.816"/>
+            <path fill="#fff" d="M16 6.932c-5.2 0-6.51 4.908-6.51 9.068 0 4.16 1.308 9.068 6.51 9.068 5.2 0 6.508-4.907 6.508-9.068 0-4.16-1.307-9.068-6.508-9.068zm0 3.42c.212 0 .404.032.585.077.374.32.558.76.198 1.38l-3.46 6.365c-.104-.806-.12-1.595-.12-2.184 0-1.837.13-5.652 2.802-5.652l-.005.01zm2.592 2.933c.184.978.21 1.998.21 2.715 0 1.833-.127 5.65-2.8 5.65-.212 0-.406-.023-.586-.068l-.1-.034c-.054-.015-.113-.035-.165-.054-.59-.256-.97-.714-.43-1.526l3.88-6.69v.007z"/>
+            <path fill="#fff" d="M15.967.246c-4.37 0-8.054 1.52-11.054 4.58-1.52 1.518-2.68 3.25-3.487 5.184C.64 11.924.246 13.92.246 16c0 2.1.393 4.096 1.18 5.99.788 1.896 1.93 3.6 3.432 5.118 1.518 1.502 3.223 2.66 5.118 3.465 1.913.792 3.91 1.18 5.992 1.18 2.08 0 4.105-.402 6.056-1.21 1.95-.807 3.69-1.964 5.228-3.485 1.483-1.443 2.604-3.102 3.354-4.973.77-1.9 1.148-3.924 1.148-6.085 0-2.138-.38-4.162-1.147-6.057-.77-1.912-1.895-3.604-3.376-5.085C24.14 1.782 20.38.246 15.97.246zm.066 2.836c3.563 0 6.603 1.263 9.134 3.795 1.22 1.22 2.157 2.614 2.792 4.17.64 1.557.96 3.21.96 4.953 0 3.62-1.24 6.624-3.7 9.024-1.278 1.24-2.71 2.19-4.3 2.846-1.58.657-3.2.982-4.888.982-1.71 0-3.344-.322-4.9-.96-1.555-.656-2.953-1.593-4.19-2.813-1.238-1.24-2.193-2.64-2.868-4.19-.66-1.58-.995-3.2-.995-4.89 0-1.708.336-3.34.992-4.9.674-1.577 1.63-2.99 2.87-4.247 2.455-2.51 5.49-3.77 9.09-3.77l-.01-.01z"/>
+          </g>
+        </symbol>
+      </defs>
+    </svg>
+
+    <script>
+      (function () {
+        var geolocationAvailable = 'geolocation' in navigator;
+        var geolocateBtnClicked = false;
+        window.addEventListener('load', function () {
+          geolocationAvailable = 'geolocation' in navigator;
+          var geolocateBtnEl = document.getElementById('form-btn-geolocate');
+          if (geolocateBtnEl) {
+            if (geolocationAvailable) {
+              geolocateBtnEl.removeAttribute('disabled', '');
+            }
+            geolocateBtnEl.addEventListener('click', function () {
+              geolocateBtnClicked = true;
+              return false;
+            });
+          }
+        });
+        function submitForm (evt) {
+          if (evt && geolocateBtnClicked) {
+            evt.preventDefault();
+            evt.stopPropagation();
+            return;
+          }
+          var urlEl = document.getElementById('url');
+          if (urlEl) {
+            var url = urlEl.value;
+            var matches = url.match(/(-?[\d\.]+)\s*[,\/ ]\s*(-?[\d\.]+)/);
+            if (matches) {
+              var geoLat = parseFloat(matches[1]);
+              var geoLong = parseFloat(matches[2]);
+              url = geoLat + '/' + geoLong;
+            }
+            window.location.href = '/' + url + '/vr.html';
+            if (evt) {
+              evt.preventDefault();
+              evt.stopPropagation();
+            }
+          }
+        }
+        window.addEventListener('submit', submitForm);
+        window.addEventListener('click', function (evt) {
+          if (!evt.target) {
+            geolocateBtnClicked = false;
+            return;
+          }
+          if (evt.target.value && evt.target.id === 'url') {
+            // Highlight the text contents of the input box.
+            evt.target.setSelectionRange(0, evt.target.value.length);
+          }
+          if (geolocationAvailable && evt.target.closest && evt.target.closest('#form-btn-geolocate')) {
+            var urlEl = document.getElementById('url');
+            var formEl = document.getElementById('form');
+            if (!urlEl || !formEl) {
+              return;
+            }
+            urlEl.value = 'Determining your location …';
+            urlEl.focus();
+            navigator.geolocation.getCurrentPosition(function (position) {
+              if (!position) {
+                url.value = 'Could not determine your location';
+                return;
+              }
+              urlEl.value = position.coords.latitude + ',' + position.coords.longitude;
+              urlEl.focus();
+              geolocateBtnClicked = false;
+              setTimeout(function () {
+                submitForm();
+              }, 500);
+            });
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
